@@ -1,0 +1,81 @@
+{
+  "id": "/migrationtool",
+  "cmd": "mv /mnt/mesos/sandbox/sample.war /usr/local/tomcat/webapps/sample.war && /usr/local/tomcat/bin/catalina.sh run",
+  "acceptedResourceRoles": [
+    "slave_public"
+  ],
+  "backoffFactor": 1.15,
+  "backoffSeconds": 1,
+  "container": {
+    "portMappings": [
+      {
+        "containerPort": 8080,
+        "hostPort": 0,
+        "labels": {
+          "VIP_0": "/migrationtool:8080"
+        },
+        "protocol": "tcp",
+        "servicePort": 0,
+        "name": "web"
+      }
+    ],
+    "portDefinitions": [
+      { "name": "web", "protocol": "tcp", "port": 8080 }
+    ],
+    "type": "DOCKER",
+    "volumes": [],
+    "docker": {
+      "image": "tomcat:latest",
+      "forcePullImage": false,
+      "privileged": false,
+      "parameters": []
+    }
+  },
+  "cpus": 1,
+  "disk": 0,
+  "env": {
+    "JAVA_OPTS": "-Xms256m -Xmx256m"
+  },
+  "fetch": [
+    {
+      "uri": "https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war",
+      "extract": false,
+      "executable": false,
+      "cache": false
+    }
+  ],
+  "healthChecks": [
+    {
+      "gracePeriodSeconds": 120,
+      "ignoreHttp1xx": false,
+      "intervalSeconds": 30,
+      "maxConsecutiveFailures": 3,
+      "portIndex": 0,
+      "timeoutSeconds": 5,
+      "delaySeconds": 15,
+      "protocol": "HTTP",
+      "path": "/",
+      "ipProtocol": "IPv4"
+    }
+  ],
+  "instances": 1,
+  "maxLaunchDelaySeconds": 3600,
+  "mem": 512,
+  "gpus": 0,
+  "networks": [
+    {
+      "mode": "container/bridge"
+    }
+  ],
+  "requirePorts": false,
+  "upgradeStrategy": {
+    "maximumOverCapacity": 1,
+    "minimumHealthCapacity": 1
+  },
+  "killSelection": "YOUNGEST_FIRST",
+  "unreachableStrategy": {
+    "inactiveAfterSeconds": 0,
+    "expungeAfterSeconds": 0
+  },
+  "constraints": []
+}
