@@ -8,7 +8,9 @@ What is needed:
 3. edgelb package installed
 4. edgelb --cli package installed
 5. edgelb pool config json
-6. a sample .war file for use in URI fetching with step #2
+6. a sample .war file for use in URI fetching with step #2 (See below for the one used)
+
+https://tomcat.apache.org/tomcat-7.0-doc/appdev/sample/sample.war
 
 Demo Instructions:
 
