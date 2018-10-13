@@ -1,0 +1,62 @@
+{
+    "apiVersion": "V2",
+    "name": "k8s-multi-cluster-devprod",
+    "count": 1,
+    "autoCertificate": true,
+    "haproxy": {
+        "frontends": [{
+                "bindPort": 6443,
+                "protocol": "HTTPS",
+                "certificates": [
+                    "$AUTOCERT"
+                ],
+                "linkBackend": {
+                    "defaultBackend": "kubernetes-dev-apiserver"
+                }
+            },
+            {
+                "bindPort": 6444,
+                "protocol": "HTTPS",
+                "certificates": [
+                    "$AUTOCERT"
+                ],
+                "linkBackend": {
+                    "defaultBackend": "kubernetes-prod-apiserver"
+                }
+            }
+        ],
+        "backends": [{
+                "name": "kubernetes-dev-apiserver",
+                "protocol": "HTTPS",
+                "services": [{
+                    "mesos": {
+                        "frameworkName": "kubernetes",
+                        "taskIDPattern": "dev.kubernetes__kube-apiserver*"
+                    },
+                    "endpoint": {
+                      "type": "ADDRESS",
+                      "address": "apiserver.devkubernetes.l4lb.thisdcos.directory",
+                      "port": 6443,
+                      "portName": "apiserver"
+                    }
+                }]
+            },
+            {
+                "name": "kubernetes-prod-apiserver",
+                "protocol": "HTTPS",
+                "services": [{
+                    "mesos": {
+                        "frameworkName": "kubernetes",
+                        "taskIDPattern": "prod.kubernetes__kube-apiserver*"
+                    },
+                    "endpoint": {
+                      "type": "ADDRESS",
+                      "address": "apiserver.prodkubernetes.l4lb.thisdcos.directory",
+                      "port": 6443,
+                      "portName": "apiserver"
+                    }
+                }]
+            }
+        ]
+    }
+}

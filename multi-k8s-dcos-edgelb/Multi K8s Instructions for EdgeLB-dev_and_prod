@@ -1,0 +1,41 @@
+Instructions
+
+**** Pre-requisites - 2 Kubernetes clusters ****
+-/prod/kubernetes running with HA enabled
+-/dev/kubernetes running with HA enabled
+****
+
+Setup EdgeLB and configure the pool
+
+1. Install Edge-LB
+2. Install CLI for Edge-LB
+3. dcos marathon app add kube-proxy-prod.json
+4. dcos marathon app add kube-proxy-dev.json
+5. dcos edgelb create multi-k8s-edgepool.json
+
+Setup API Servers for prod and dev in kubeconfig
+
+PROD
+----Configure Prod API Backend for kubeconfig----
+
+    dcos config set kubernetes.service_name /prod/kubernetes
+
+    dcos kubernetes kubeconfig --context-name=dcosk8s-prod --apiserver-url=http://PUBLICNODEIP:6443 \
+    --insecure-skip-tls-verify
+
+----IMPORTANT - Make sure you are using a different context name before you run the command above----
+
+DEV
+----Configure Dev API Backend for kubeconfig----
+
+  dcos config set kubernetes.service_name /dev/kubernetes
+  dcos kubernetes kubeconfig --apiserver-url=http://52.13.34.84 \
+    --insecure-skip-tls-verify
+
+NOTE: If you get any errors it is most likely from stale contexts, clusters, or set users still in the Kubeconfig
+
+Access the Kubernetes Dashboard for PROD cluster over
+http://PUBLICNODE:6443/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/
+
+Access the Kubernetes Dashboard for DEV cluster over
+http://PUBLICNODE:6443/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/
