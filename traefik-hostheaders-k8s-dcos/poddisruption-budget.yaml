@@ -1,0 +1,19 @@
+{{- if .Values.podDisruptionBudget -}}
+apiVersion: policy/v1beta1
+kind: PodDisruptionBudget
+metadata:
+  name: Traefik-PDB
+spec:
+  selector:
+    maxUnavailable:
+    minAvailable:
+    matchLabels:
+      app:
+
+externalTrafficPolicy: Cluster
+replicas: 1
+ podDisruptionBudget: {}
+  # maxUnavailable: 1
+  # minAvailable: 2
+
+{{- end -}}
