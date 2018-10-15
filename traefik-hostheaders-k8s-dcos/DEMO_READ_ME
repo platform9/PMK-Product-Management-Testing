@@ -3,10 +3,12 @@ Based on some of the items in the latest GitHub branch herehttps://github.com/co
 README_Consolidated Instructions for Deploying and Testing Traefik in K8s on DC/OS
 
 1. Deploy K8s
-2. Run the dcos-k8s-setup.sh script to configure api server and K8s UI
-3. Run the traefik-dcos.k8s.sh script to deploy ingress, pods, ds, brace, tiller, and web services 
+2. Run the RUN1 dcos-k8s-install.sh script to configure api server and K8s UI
+3. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds, brace, tiller, and web services 
 
-Configure API Server and UI Proxy for Dashboard to K8s
+Steps Executed by Script(s) Below ---------------------
+
+Configures API Server and UI Proxy for Dashboard to K8s
 
   dcos marathon app add marathon-lb
 
@@ -16,24 +18,24 @@ Configure API Server and UI Proxy for Dashboard to K8s
 
     Point browser to http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/
 
-Deploy Traefik with Cluster Role Binding and rbac
+Deploys Traefik with Cluster Role Binding and rbac
 
 kubectl create -f traefik-rbac.yaml
 
-Deploy Traefik Configuration
+Deploys Traefik Configuration
 
   kubectl apply -f traefik-k8s.yaml
   kubectl apply -f traefik-ds.yaml
 
-Confirm Deployment
+Confirms Deployment
 
   kubectl --namespace=kube-system get pods
 
-Deploy traefik UI
+Deploys traefik UI
 
   kubectl apply -f traefik-ui.yaml
 
-Deploy Tiller on your K8s Cluster
+Deploys Tiller on your K8s Cluster
 
   kubectl -n kube-system create serviceaccount tiller
   kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
@@ -42,7 +44,7 @@ Deploy Tiller on your K8s Cluster
 
   *** Wait for tiller to be running
 
-Deploy Helm Chart for traefik Dashboard and Frontend Access to Services
+Deploys Helm Chart for traefik Dashboard and Frontend Access to Services
 
   helm install stable/traefik --name my-release --namespace kube-system
 
@@ -58,13 +60,13 @@ Deploy Helm Chart for traefik Dashboard and Frontend Access to Services
 
 Test Example for Named-Based Routing: Cheese Web Services
 
-  Create PODs for Cheese App
+  Creates PODs for Cheese App
     kubectl create -f cheese-pod.yaml
 
-  Deploy Services on PODs
+  Deploys Services on PODs
     kubectl create -f cheese-webservices.yaml
 
-  Deploy Ingress for cheese
+  Deplos Ingress for cheese
     kubectl create -f cheese-ingress
 
 Now visit the Træfik dashboard and you should see a frontend for each host.
