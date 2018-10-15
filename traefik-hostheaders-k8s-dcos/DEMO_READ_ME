@@ -24,7 +24,7 @@ kubectl create -f traefik-rbac.yaml
 
 Deploys Traefik Configuration
 
-  kubectl apply -f traefik-k8s.yaml
+  kubectl apply -f traefikcontroller-k8s.yaml
   kubectl apply -f traefik-ds.yaml
 
 Confirms Deployment
@@ -61,13 +61,13 @@ Deploys Helm Chart for traefik Dashboard and Frontend Access to Services
 Test Example for Named-Based Routing: Cheese Web Services
 
   Creates PODs for Cheese App
-    kubectl create -f cheese-pod.yaml
+    kubectl create -f cheese-pods.yaml
 
   Deploys Services on PODs
     kubectl create -f cheese-webservices.yaml
 
-  Deplos Ingress for cheese
-    kubectl create -f cheese-ingress
+  Deploys Ingress for cheese
+    kubectl create -f cheese-ingress.yaml
 
 Now visit the Træfik dashboard and you should see a frontend for each host.
 Along with a backend listing for each service with a server set up for each pod
