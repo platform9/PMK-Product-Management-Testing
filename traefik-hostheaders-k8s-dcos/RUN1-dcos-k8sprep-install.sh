@@ -3,9 +3,9 @@
 # Get DC/OS Master Node URL
 
 echo
-echo " #################################"
-echo " ### Verifying DC/OS CLI Setup ###"
-echo " #################################"
+echo " #########################################################"
+echo " ### DCOS-Kubernetes API-Server Configuration Install  ###"
+echo " #########################################################"
 echo
 
 # Make sure the DC/OS CLI is available
@@ -14,7 +14,7 @@ if [[ "$result" == *"no dcos in"* ]]
 then
         echo
         echo " ERROR: The DC/OS CLI program is not installed. Please install it."
-        echo " Follow the instructions found here: https://docs.mesosphere.com/1.10/cli/install/"
+        echo " Follow the instructions found here: https://docs.mesosphere.com/1.11/cli/install/"
         echo " Exiting."
         echo
         exit 1
@@ -71,7 +71,7 @@ echo
 read -p "Install DCOS Kubernetes and CLI, ? (y/n) " -n1 -s c
 if [ "$c" = "y" ]; then
 
-dcos package install kubernetes
+dcos package install kubernetes --options=options.json
 dcos package install kubernetes --cli
 
 fi
@@ -89,17 +89,36 @@ echo
 echo
 echo
 echo
+echo "Waiting for Kubernetes to come up...this usually take about 120 seconds..."
+dcos kubernetes plam show deploy
+sleep 20
+echo "Waiting for Kubernetes to come up...20 seconds"
+dcos kubernetes plam show deploy
+sleep 20
+echo "Waiting for Kubernetes to come up...40 seconds"
+dcos kubernetes plam show deploy
+sleep 20
+echo "Waiting for Kubernetes to come up...60 seconds"
+dcos kubernetes plam show deploy
+sleep 20
+echo "Waiting for Kubernetes to come up...80 seconds"
+dcos kubernetes plam show deploy
+sleep 20
+echo "Waiting for Kubernetes to come up...100 seconds"
+dcos kubernetes plam show deploy
+sleep 20
+echo "Waiting for Kubernetes to come up...120 seconds"
+dcos kubernetes plam show deploy
+sleep 20
 
-echo "Please Enter the Public Node of Marathon-LB..."
-
-        read -p 'Enter Public IP manually: ' PUBLICNODEIP
+        read -p 'Enter Public IP manually when Kubernetes is finished installing (COMPLETED): ' PUBLICNODEIP
         PUBLICNODEIP=$PUBLICNODEIP
 
-echo "Configuring Kubeconfig to use the DCOS-Kubernetes API Server URL for Frontend Traffic and Kubernetes Dashboard..."
-sleep 5
+echo "Configuring Kubeconfig to use the DCOS-Kubernetes API Server URL for Frontend Traffic and Kubernetes Dashboard"
+sleep 10
 echo
 
-dcos kubernetes kubeconfig --context-name=k8sdcos-traefik --apiserver-url https://$PUBLICNODEIP:6443 --insecure-skip-tls-verify --name="kubernetes"
+dcos kubernetes kubeconfig --context-name=k8sdcos --apiserver-url https://$PUBLICNODEIP:6443 --insecure-skip-tls-verify --name="kubernetes"
 
 echo
 echo

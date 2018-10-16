@@ -2,18 +2,26 @@
 
 
 echo
-echo  "PRE-REQUISITES
+echo " #########################################################################"
+echo " ### Traefik Ingress Controller Configuration and Install on DCOS-K8s  ###"
+echo " #########################################################################"
+echo
 
-In order to test hostname headers in Traefik, please...
+echo "######PLESSE CHECK THE FOLLOWING PRE-REQUISITES BEFORE INSTALL! ########"
+echo
+echo "1. You have installed kubernetes with exactly 1 Public Node in RUN1 options.json"
+sleep 2
 
-1. Install kubernetes with exactly 1 Public Node inside the DC/OS GUI (HA is optional)
-2. Find the public kubelet's node IP by running 'run 'kubectl describe node 'kube-node-public-0-kubelet.kubernetes.mesos'
-3. Edit your local machine's ''/etc/hosts' file with the '<public-kubernetes-node-IP'> www.k8sdcos-cheddar.com'
+echo "2. You have found the public kubelet's node IP by running
+'kubectl describe node kube-node-public-0-kubelet.kubernetes.mesos'"
+sleep 2
 
-Note: In this example we are using only 1 out of the 3 cheese services to illustrate hostname headers
-and the ability to link these back to backend pods and loadbalancers via a single Traefik controller
+echo "3. You have edited your local machines '/etc/hosts' file with
+'<public-kubernetes-node-IP'> www.k8sdcos-cheddar.com"
+sleep 2
 
-Once you have finished the pre-requisites, please continue.."
+echo "Once you have finished the pre-requisites, please continue with the rest of the installation...."
+sleep 2
 
 read -p "Are you ready to install Traefik now, ? (y/n) " -n1 -s c
 if [ "$c" = "y" ]; then
@@ -33,6 +41,7 @@ echo "Deploying Main Traefik Ingrees Controller on Public Node"
 sleep 3
 
 echo "Deploying Dameonset for Traefik on all Nodes"
+
   kubectl apply -f traefik-ds.yaml
 
 sleep 3
@@ -62,7 +71,7 @@ echo "Installing Traefik Helm Chart - Latest v1.7.2"
 
 echo "Installing Example Web-Services Configuration with Named-Based Routing to Traefik Ingress Controller.
 
-NOTE: This will install all pods, services, and ingress rules to expose ONLY the cheddar web service running NGINX
+NOTE: This will install all pods, services, and ingress rules needed, but will expose ONLY the cheddar web service running NGINX
 The other 2 web services will not be resolvable on your network unless you expose the service over a designated portDefinitions
 and configure a working hostname inside your /etc/hosts file
 
@@ -78,41 +87,42 @@ This is not needed 'for' this demo, but you can accomplish this by:
 read -p "Do you want to continue, ? (y/n) " -n1 -s c
 if [ "$c" = "y" ]; then
 
-  echo "Deploying Application POD called Cheese"
+  echo "Deploying Application PODS with apps Cheddar, Stilton, and Wesleydale..."
       kubectl create -f cheese-pods.yaml
 
       sleep 3
   echo
 
-  echo "Configuring 3 Example Web Services on PODs"
+  echo "Configuring 3 kubernetes services configurations on PODs"
       kubectl create -f cheese-webservices.yaml
 
       sleep 3
   echo
 
-  echo "Deploying Ingress Configuration for Hostname Headers using Kubernetes node names and Mesos DNS"
+  echo "Deploying Ingress Configuration with Hostname Headers designated inside cheese-ingress.yaml file"
       kubectl create -f cheese-ingress.yaml
 
       sleep 3
   echo
 
-else
-
-echo no
-exit
-
-echo "Exposing the cheddar hostname over the public kubelet using configured header www.k8sdcos-cheddar.com"
+echo "Exposing the cheddar hostname for ingress over the public kubelet using configured header 'www.k8sdcos-cheddar.com'"
 
 kubectl expose service cheddar --port=443 --target-port=8443 --name=cheddar-http
-echo
 
 echo "Finished!
 
-You can now verify the installation directly with the hostname of the cheddar service"
+You can now verify the installation directly with the hostname of the cheddar service...
 
-echo "Opening the configured hostname to show nginx running on the cheddar web service"
+Note: This can also be located via the Træfik dashboard where you should see a frontend for each host"
+sleep 3
+
+echo "Opening broswer now with hostname header for cheddar web service (NGINX Homepage) in a moment"
+sleep 7
 open http://k8sdcos-cheddar.com
 
-echo "This can be located via the Træfik dashboard where you should see a frontend for each host"
+fi
 
+else
+
+echo no
 fi
