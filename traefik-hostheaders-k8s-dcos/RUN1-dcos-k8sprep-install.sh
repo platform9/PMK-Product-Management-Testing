@@ -72,7 +72,6 @@ read -p "Install DCOS Kubernetes and CLI, ? (y/n) " -n1 -s c
 if [ "$c" = "y" ]; then
 
 dcos package install kubernetes --options=options.json
-dcos package install kubernetes --cli
 
 fi
 # Install marathon-lb for IaaS level ingest to K8s Framework
