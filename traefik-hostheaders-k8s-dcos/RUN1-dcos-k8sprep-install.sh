@@ -90,25 +90,25 @@ echo
 echo
 echo
 echo "Waiting for Kubernetes to come up...this usually take about 120 seconds..."
-dcos kubernetes plam show deploy
+dcos kubernetes plan show deploy
 sleep 20
 echo "Waiting for Kubernetes to come up...20 seconds"
-dcos kubernetes plam show deploy
+dcos kubernetes plan show deploy
 sleep 20
 echo "Waiting for Kubernetes to come up...40 seconds"
-dcos kubernetes plam show deploy
+dcos kubernetes plan show deploy
 sleep 20
 echo "Waiting for Kubernetes to come up...60 seconds"
-dcos kubernetes plam show deploy
+dcos kubernetes plan show deploy
 sleep 20
 echo "Waiting for Kubernetes to come up...80 seconds"
-dcos kubernetes plam show deploy
+dcos kubernetes plan show deploy
 sleep 20
 echo "Waiting for Kubernetes to come up...100 seconds"
-dcos kubernetes plam show deploy
+dcos kubernetes plan show deploy
 sleep 20
 echo "Waiting for Kubernetes to come up...120 seconds"
-dcos kubernetes plam show deploy
+dcos kubernetes plan show deploy
 sleep 20
 
         read -p 'Enter Public IP manually when Kubernetes is finished installing (COMPLETED): ' PUBLICNODEIP
