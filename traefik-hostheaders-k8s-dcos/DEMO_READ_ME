@@ -2,72 +2,50 @@ Based on some of the items in the latest GitHub branch herehttps://github.com/co
 
 README_Consolidated Instructions for Deploying and Testing Traefik in K8s on DC/OS
 
-1. Deploy K8s
-2. Run the RUN1 dcos-k8s-install.sh script to configure api server and K8s UI
-3. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds, brace, tiller, and web services 
+I. Run the RUN1 dcos-k8s-install.sh script to configure K8s with options file for 1 public node 
+-------------Steps Executed by Script(s) Below ---------------------
+      
+      *** Installs Kubernetes with 1 Public Node
+      *** Installs Marathon-LB 
+      *** Deploys maraton app for kubectl proxy to server UI over localhost:8001
+      *** Configures api-server in kubeconfig to set api-server url backend for MLB
+   
+   BEFORE GOING ON TO STEP 2:
+   
+   - Identify which public node marathon-lb sits on (Through AWS or CLI)- you will need this for RUN2
 
-Steps Executed by Script(s) Below ---------------------
+   - Identify which public node the public-kubelet sits on (Execute findpublicips.sh script and use 
+     the one which is not for marathonlb
+     
+   - Edit your local /etc/hosts file with <public-IP-kubelet> www.k8sdcos-cheddar.com 
 
-Configures API Server and UI Proxy for Dashboard to K8s
+II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds, brace, tiller, and 
+   web services    
+-------------Steps Executed by Script(s) Below ---------------------
 
-  dcos marathon app add marathon-lb
+1. Deploys Ingress Controller nad Traefik UI
 
-  dcos kubernetes kubeconfig \
-    --apiserver-url https://<public-ip>:6443 \
-    --insecure-skip-tls-verify
+    *** Deploys Traefik with Cluster Role Binding and rbac
+    *** Deploys Traefik Controller Configuration
+    *** Confirms Deployment
+    *** Deploys traefik UI Helm Chart
+          - Deploys Tiller on your K8s Cluster
+          - Creates service account for Tiller
+          - Assigns cluster role for cluster-admin to SA
+          - Installs Helm Chart for Traefik UI 1.7.2 
 
-    Point browser to http://127.0.0.1:8001/api/v1/namespaces/kube-system/services/http:kubernetes-dashboard:/proxy/
+2. Configures Test Example for Named-Based Routing Using NGINX-based 'Cheese Web Services'
 
-Deploys Traefik with Cluster Role Binding and rbac
+  *** Creates PODs for Cheese App (Cheddar, Stilton and Wesleydale)
+  *** Deploys Services on PODs
+  *** Deploys Ingress for cheese
+  *** Exposes the cheddar service for NGINX over port 8443 on the public kubelet 
+          - Leverages the hostname header from the ingress rules in cheese-ingress.yaml
 
-kubectl create -f traefik-rbac.yaml
+When you visit the Træfik dashboard, you should see a frontend for each hostname
+along with a backend listing for each service with a server set up for each pod. If you have configured
+the hostname header in your /etc/hosts file correctly, you can go directly to the hostname
+in your browser of choice
 
-Deploys Traefik Configuration
-
-  kubectl apply -f traefikcontroller-k8s.yaml
-  kubectl apply -f traefik-ds.yaml
-
-Confirms Deployment
-
-  kubectl --namespace=kube-system get pods
-
-Deploys traefik UI
-
-  kubectl apply -f traefik-ui.yaml
-
-Deploys Tiller on your K8s Cluster
-
-  kubectl -n kube-system create serviceaccount tiller
-  kubectl create clusterrolebinding tiller --clusterrole cluster-admin --serviceaccount=kube-system:tiller
-  helm init --service-account tiller
-  kubectl -n kubesystem get pods
-
-  *** Wait for tiller to be running
-
-Deploys Helm Chart for traefik Dashboard and Frontend Access to Services
-
-  helm install stable/traefik --name my-release --namespace kube-system
-
-    You can watch the status by running:
-
-    1.  $ kubectl get svc my-release-traefik --namespace kube-system -w
-
-      Once 'EXTERNAL-IP' is no longer '<pending>':
-
-    2  $ kubectl describe svc my-release-traefik --namespace kube-system | grep Ingress | awk '{print $3}'
-
-      IMPORTANT: Configure DNS records corresponding to Kubernetes ingress resources to point to the load balancer IP/hostname found in step 1
-
-Test Example for Named-Based Routing: Cheese Web Services
-
-  Creates PODs for Cheese App
-    kubectl create -f cheese-pods.yaml
-
-  Deploys Services on PODs
-    kubectl create -f cheese-webservices.yaml
-
-  Deploys Ingress for cheese
-    kubectl create -f cheese-ingress.yaml
-
-Now visit the Træfik dashboard and you should see a frontend for each host.
-Along with a backend listing for each service with a server set up for each pod
+Note: If you are using this in production, then this would be done using your own 
+chosen domains and DNS server
