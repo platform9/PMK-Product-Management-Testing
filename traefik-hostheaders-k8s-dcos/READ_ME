@@ -1,8 +1,16 @@
-Based on some of the items in the latest GitHub branch herehttps://github.com/containous/traefik/blob/master/docs/user-guide/kubernetes.md
+README------------------
 
-README_Consolidated Instructions for Deploying and Testing Traefik in K8s on DC/OS
+Consolidated Instructions for Deploying and Testing Traefik in K8s on DC/OS 
+Leverages several up to date Traefik items https://github.com/containous/traefik/blob/master/docs/user-guide/
+
+To Install the DEMO:
+
+Ensure you have atleast 2 Public Nodes and 8 Private Nodes in DC/OS EE
+
+THen....
 
 I. Run the RUN1 dcos-k8s-install.sh script to configure K8s with options file for 1 public node 
+
 -------------Steps Executed by Script(s) Below ---------------------
       
       *** Installs Kubernetes with 1 Public Node
@@ -21,6 +29,7 @@ I. Run the RUN1 dcos-k8s-install.sh script to configure K8s with options file fo
 
 II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds, brace, tiller, and 
    web services    
+   
 -------------Steps Executed by Script(s) Below ---------------------
 
 1. Deploys Ingress Controller nad Traefik UI
@@ -46,6 +55,8 @@ When you visit the Træfik dashboard, you should see a frontend for each hostnam
 along with a backend listing for each service with a server set up for each pod. If you have configured
 the hostname header in your /etc/hosts file correctly, you can go directly to the hostname
 in your browser of choice
+
+3. Opens the hostname www.k8sdcos-cheddar.com with NGINX welcome page
 
 Note: If you are using this in production, then this would be done using your own 
 chosen domains and DNS server
