@@ -20,12 +20,10 @@ I. Run the RUN1 dcos-k8s-install.sh script to configure K8s with options file fo
    
    BEFORE GOING ON TO STEP 2:
    
-   - Identify which public node marathon-lb sits on (Through AWS or CLI)- you will need this for RUN2
-
    - Identify which public node the public-kubelet sits on (Execute findpublicips.sh script and use 
-     the one which is not for marathonlb
+     the one which is not for marathonlb)
      
-   - Edit your local /etc/hosts file with <public-IP-kubelet> www.k8sdcos-cheddar.com 
+   - Edit your local /etc/hosts file with '<public-IP-kubelet> www.k8sdcos-cheddar.com'
 
 II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds, brace, tiller, and 
    web services    
@@ -45,18 +43,18 @@ II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds,
 
 2. Configures Test Example for Named-Based Routing Using NGINX-based 'Cheese Web Services'
 
-  *** Creates PODs for Cheese App (Cheddar, Stilton and Wesleydale)
-  *** Deploys Services on PODs
-  *** Deploys Ingress for cheese
-  *** Exposes the cheddar service for NGINX over port 8443 on the public kubelet 
+   *** Creates PODs for Cheese App (Cheddar, Stilton and Wesleydale)
+   *** Deploys Services on PODs
+   *** Deploys Ingress for cheese
+   *** Exposes the cheddar service for NGINX over port 8443 on the public kubelet 
           - Leverages the hostname header from the ingress rules in cheese-ingress.yaml
 
 When you visit the Træfik dashboard, you should see a frontend for each hostname
-along with a backend listing for each service with a server set up for each pod. If you have configured
-the hostname header in your /etc/hosts file correctly, you can go directly to the hostname
+along with a backend listing for each service with a server set up for each pod. 
+
+If you have configured the hostname header in your /etc/hosts file correctly, you can go directly to the hostname
 in your browser of choice
 
 3. Opens the hostname www.k8sdcos-cheddar.com with NGINX welcome page
 
-Note: If you are using this in production, then this would be done using your own 
-chosen domains and DNS server
+Note: If you are using this in production, then this would be done using your own chosen domains and DNS server
