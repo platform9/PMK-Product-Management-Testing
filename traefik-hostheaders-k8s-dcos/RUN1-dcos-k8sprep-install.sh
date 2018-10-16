@@ -68,9 +68,10 @@ echo "DC/OS CLI Setup Correctly"
 echo
 
 #Configure Kubernetes CLI
-read -p "Install DCOS Kubernetes CLI, ? (y/n) " -n1 -s c
+read -p "Install DCOS Kubernetes and CLI, ? (y/n) " -n1 -s c
 if [ "$c" = "y" ]; then
 
+dcos package install kubernetes
 dcos package install kubernetes --cli
 
 fi
@@ -98,7 +99,7 @@ echo "Configuring Kubeconfig to use the DCOS-Kubernetes API Server URL for Front
 sleep 5
 echo
 
-dcos kubernetes kubeconfig --context-name=k8sdcos-traefik --apiserver-url https://$PUBLICNODEIP:6443 --insecure-skip-tls-verify
+dcos kubernetes kubeconfig --context-name=k8sdcos-traefik --apiserver-url https://$PUBLICNODEIP:6443 --insecure-skip-tls-verify --name="kubernetes"
 
 echo
 echo

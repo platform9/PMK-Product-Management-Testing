@@ -13,7 +13,7 @@ spec:
         backend:
           serviceName: stilton
           servicePort: http
-  - host: cheddar.kubernetes.mesos
+  - host: www.k8sdcos-cheddar.com
     http:
       paths:
       - path: /
