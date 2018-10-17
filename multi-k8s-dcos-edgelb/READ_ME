@@ -1,0 +1,36 @@
+Pre-reqs ---- 
+
+1.11+
+atleast 10 private agents
+atleasdt 3 public agents 
+
+Script Steps -----
+
+1. Installs Kubernetes Dev in Dev Folder
+2. Installs Kubernetes Prod in Prod Folder
+3. Install EdgeLB v1.2 and CLI
+4. Creates Pool "multi-kubectl-proxy" from DCOSpool file
+5. Configures API Servers for prod and dev in kubeconfig
+
+PROD
+----Configures Prod API Backend for kubeconfig---- (Command Below if needed after script run)
+
+    dcos kubernetes kubeconfig --name="kubernetes.dev" --apiserver-url=https://PUBLICNODEIP:7000 --insecure-skip-tls-verify
+
+DEV
+----Configures Dev API Backend for kubeconfig---- (Command Below if needed after script run)
+
+ dcos kubernetes kubeconfig --name="kubernetes.prod" --apiserver-url=https://PUBLICNODEIP:7001 --insecure-skip-tls-verify
+
+NOTE: If you get any errors it is most likely from stale contexts, clusters, or set users still in the Kubeconfig
+
+kubectl proxy 
+serves prod cluster over local hosts 127.0.0.1:8001/.....
+
+To get to other cluster:
+
+kubectl config get-contexts
+switch context to dev cluster using 'kubectl config use-context "devcontext#"
+
+re-run kubectl proxy to access dev dashboard
+
