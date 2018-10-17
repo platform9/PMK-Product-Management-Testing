@@ -1,0 +1,18 @@
+{
+  "service": {
+    "name": "/dev/kubernetes",
+    "sleep": 1000,
+    "service_account": "",
+    "service_account_secret": "",
+    "log_level": "INFO"
+  },
+  "kubernetes": {
+    "authorization_mode": "AlwaysAllow",
+    "high_availability": false,
+    "enable_insecure_port": true,
+    "control_plane_placement": "",
+    "node_count": 1,
+    "public_node_count": 1,
+    "public_node_placement": "[[\"hostname\", \"UNIQUE\"]])"
+  }
+}

@@ -1,11 +1,11 @@
 {
     "apiVersion": "V2",
-    "name": "k8s-multi-cluster-devprod",
+    "name": "multik8s-kubectl-proxy",
     "count": 1,
     "autoCertificate": true,
     "haproxy": {
         "frontends": [{
-                "bindPort": 6443,
+                "bindPort": 7000,
                 "protocol": "HTTPS",
                 "certificates": [
                     "$AUTOCERT"
@@ -15,7 +15,7 @@
                 }
             },
             {
-                "bindPort": 6444,
+                "bindPort": 7001,
                 "protocol": "HTTPS",
                 "certificates": [
                     "$AUTOCERT"
@@ -30,7 +30,7 @@
                 "protocol": "HTTPS",
                 "services": [{
                     "mesos": {
-                        "frameworkName": "kubernetes",
+                        "frameworkName": "kubernetes-dev",
                         "taskIDPattern": "dev.kubernetes__kube-apiserver*"
                     },
                     "endpoint": {
@@ -46,7 +46,7 @@
                 "protocol": "HTTPS",
                 "services": [{
                     "mesos": {
-                        "frameworkName": "kubernetes",
+                        "frameworkName": "kubernetes-prod",
                         "taskIDPattern": "prod.kubernetes__kube-apiserver*"
                     },
                     "endpoint": {
