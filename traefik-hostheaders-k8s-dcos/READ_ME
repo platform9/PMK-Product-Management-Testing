@@ -24,6 +24,9 @@ I. Run the RUN1 dcos-k8s-install.sh script to configure K8s with options file fo
      the one which is not for marathonlb)
      
    - Edit your local /etc/hosts file with '<public-IP-kubelet> www.k8sdcos-cheddar.com'
+   
+   - Edit your local /etc/hosts file with '<YOUR-KUBE_PUBLIC_IP> kube-node-0-kubelet.kubernetes.mesos' 
+   *** This will allow you to access the traefik UI over http://kube-node-0-kubelet.kubernetes.mesos ***
 
 II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds, brace, tiller, and 
    web services    
