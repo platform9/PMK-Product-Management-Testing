@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: cheese
-        image: nginx
+        image: errm/cheese:stilton
         ports:
         - containerPort: 80
 ---
@@ -47,7 +47,7 @@ spec:
     spec:
       containers:
       - name: cheese
-        image: nginx
+        image: errm/cheese:cheddar
         ports:
         - containerPort: 80
 ---
@@ -73,6 +73,6 @@ spec:
     spec:
       containers:
       - name: cheese
-        image: nginx
+        image: errm/cheese:wensleydale
         ports:
         - containerPort: 80
