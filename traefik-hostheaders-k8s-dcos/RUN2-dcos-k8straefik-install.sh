@@ -12,8 +12,7 @@ echo
 echo "1. You have installed kubernetes with exactly 1 Public Node in RUN1 options.json"
 sleep 2
 
-echo "2. You have found the public kubelet's node IP by running
-'kubectl describe node kube-node-public-0-kubelet.kubernetes.mesos'"
+echo "2. You have found the public kubelet's node IP for kube-node-public-0-kubelet.kubernetes.mesos"
 sleep 2
 
 echo "3. You have edited your local machines '/etc/hosts' file with
