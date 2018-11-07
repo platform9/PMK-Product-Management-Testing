@@ -58,6 +58,6 @@ along with a backend listing for each service with a server set up for each pod.
 If you have configured the hostname header in your /etc/hosts file correctly, you can go directly to the hostname
 in your browser of choice
 
-3. Opens the hostname www.k8sdcos-cheddar.com with NGINX welcome page
+3. Opens the hostname www.k8sdcos-cheddar.com with the 'cheddar' welcome page
 
 Note: If you are using this in production, then this would be done using your own chosen domains and DNS server
