@@ -6,21 +6,21 @@ metadata:
     kubernetes.io/ingress.class: traefik
 spec:
   rules:
-  - host: stilton.kubernetes.mesos
+  - host: www.cheese-stinton.com
     http:
       paths:
       - path: /
         backend:
           serviceName: stilton
           servicePort: http
-  - host: www.k8sdcos-cheddar.com
+  - host: www.cheese-cheddar.com
     http:
       paths:
       - path: /
         backend:
           serviceName: cheddar
           servicePort: http
-  - host: wensleydale.kubernetes.mesos
+  - host: www.cheese-wesleydale.com
     http:
       paths:
       - path: /
