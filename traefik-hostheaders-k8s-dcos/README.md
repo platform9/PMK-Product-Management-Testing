@@ -49,7 +49,7 @@ II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds,
    *** Creates PODs for Cheese App (Cheddar, Stilton and Wesleydale)
    *** Deploys Services on PODs
    *** Deploys Ingress for cheese
-   *** Exposes the cheddar service for NGINX over port 8443 on the public kubelet 
+   *** Exposes the cheese service over port 8443 on the public kubelet 
           - Leverages the hostname header from the ingress rules in cheese-ingress.yaml
 
 When you visit the Træfik dashboard, you should see a frontend for each hostname
