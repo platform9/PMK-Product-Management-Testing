@@ -23,7 +23,7 @@ I. Run the RUN1 dcos-k8s-install.sh script to configure K8s with options file fo
    - Identify which public node the public-kubelet sits on (Execute findpublicips.sh script and use 
      the one which is not for marathonlb)
      
-   - Edit your local /etc/hosts file with '<public-IP-kubelet> www.k8sdcos-cheddar.com'
+   - Edit your local /etc/hosts file with '<public-IP-kubelet> www.cheese-cheddar.com www.cheese-wesleydale.com www.cheese-stinton.com'
    
    - Edit your local /etc/hosts file with '<YOUR-KUBE_PUBLIC_IP> kube-node-0-kubelet.kubernetes.mesos' 
    *** This will allow you to access the traefik UI over http://kube-node-0-kubelet.kubernetes.mesos ***
@@ -58,6 +58,8 @@ along with a backend listing for each service with a server set up for each pod.
 If you have configured the hostname header in your /etc/hosts file correctly, you can go directly to the hostname
 in your browser of choice
 
-3. Opens the hostname www.k8sdcos-cheddar.com with the 'cheddar' welcome page
+Open the hostname www.cheese-cheddar.com to view the 'cheddar' welcome page
+Open the hostname with www.cheese-wesleydale.com to view the 'wesleydale' welcome page
+Open the hostname with www.cheese-wesleydale.com to view the 'wesleydale' welcome page
 
 Note: If you are using this in production, then this would be done using your own chosen domains and DNS server
