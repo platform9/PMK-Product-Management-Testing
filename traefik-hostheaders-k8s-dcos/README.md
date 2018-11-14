@@ -67,7 +67,9 @@ If you have configured the hostname header in your /etc/hosts file correctly, yo
 in your browser of choice
 
 Open the hostname www.cheese-cheddar.com to view the 'cheddar' welcome page
+
 Open the hostname with www.cheese-stinton.com to view the 'stinton' welcome page
+
 Open the hostname with www.cheese-wesleydale.com to view the 'wesleydale' welcome page
 
 Note: If you are using this in production, then this would be done using your own chosen domains and DNS server
