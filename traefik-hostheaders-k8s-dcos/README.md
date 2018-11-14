@@ -5,8 +5,6 @@ To Install the DEMO:
 
 Ensure you have atleast 2 Public Nodes and 8 Private Nodes in DC/OS EE
 
-THen....
-
 I. Run the RUN1 dcos-k8s-install.sh script to configure K8s with options file for 1 public node 
 
 -------------Steps Executed by Script(s) Below ---------------------
