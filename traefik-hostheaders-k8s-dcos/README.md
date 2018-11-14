@@ -33,20 +33,31 @@ II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds,
 1. Deploys Ingress Controller nad Traefik UI
 
     *** Deploys Traefik with Cluster Role Binding and rbac
+    
     *** Deploys Traefik Controller Configuration
+    
     *** Confirms Deployment
+    
     *** Deploys traefik UI Helm Chart
+    
           - Deploys Tiller on your K8s Cluster
+          
           - Creates service account for Tiller
+          
           - Assigns cluster role for cluster-admin to SA
+          
           - Installs Helm Chart for Traefik UI 1.7.2 
 
 2. Configures Test Example for Named-Based Routing Using NGINX-based 'Cheese Web Services'
 
    *** Creates PODs for Cheese App (Cheddar, Stilton and Wesleydale)
+   
    *** Deploys Services on PODs
+   
    *** Deploys Ingress for cheese
+   
    *** Exposes the cheese service over port 8443 on the public kubelet 
+   
           - Leverages the hostname header from the ingress rules in cheese-ingress.yaml
 
 When you visit the Træfik dashboard, you should see a frontend for each hostname
