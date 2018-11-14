@@ -1,5 +1,3 @@
-README------------------
-
 Consolidated Instructions for Deploying and Testing Traefik in K8s on DC/OS 
 Leverages several up to date Traefik items https://github.com/containous/traefik/blob/master/docs/user-guide/
 
@@ -23,13 +21,14 @@ I. Run the RUN1 dcos-k8s-install.sh script to configure K8s with options file fo
    - Identify which public node the public-kubelet sits on (Execute findpublicips.sh script and use 
      the one which is not for marathonlb)
      
-   - Edit your local /etc/hosts file with '<public-IP-kubelet> www.cheese-cheddar.com www.cheese-wesleydale.com www.cheese-stinton.com'
+   - Edit your local /etc/hosts file with 
+   <public-IP-kubelet> www.cheese-cheddar.com www.cheese-wesleydale.com www.cheese-stinton.com'
    
-   - Edit your local /etc/hosts file with '<YOUR-KUBE_PUBLIC_IP> kube-node-0-kubelet.kubernetes.mesos' 
+   - Edit your local /etc/hosts file with 
+   <public-IP-kubelet> kube-node-0-kubelet.kubernetes.mesos 
    *** This will allow you to access the traefik UI over http://kube-node-0-kubelet.kubernetes.mesos ***
 
-II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds, brace, tiller, and 
-   web services    
+II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds, tiller, and web services    
    
 -------------Steps Executed by Script(s) Below ---------------------
 
@@ -55,11 +54,11 @@ II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds,
 When you visit the Træfik dashboard, you should see a frontend for each hostname
 along with a backend listing for each service with a server set up for each pod. 
 
-If you have configured the hostname header in your /etc/hosts file correctly, you can go directly to the hostname
+If you have configured the hostname header in your /etc/hosts file correctly, you can go directly to the hostnames
 in your browser of choice
 
 Open the hostname www.cheese-cheddar.com to view the 'cheddar' welcome page
-Open the hostname with www.cheese-wesleydale.com to view the 'wesleydale' welcome page
+Open the hostname with www.cheese-stinton.com to view the 'stinton' welcome page
 Open the hostname with www.cheese-wesleydale.com to view the 'wesleydale' welcome page
 
 Note: If you are using this in production, then this would be done using your own chosen domains and DNS server
