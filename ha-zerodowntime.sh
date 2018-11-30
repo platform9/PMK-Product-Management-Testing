@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Author: Jeremy Kuhnash, jkuhnash@mesosphere.com
+# Contributor: Eric Bannon, ebannon@mesosphere.com 
 # Licensed under the Apache 2.0 software license, no warranty implied.
 # https://www.apache.org/licenses/LICENSE-2.0
 
