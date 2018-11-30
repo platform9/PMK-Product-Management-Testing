@@ -46,7 +46,7 @@ II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds,
           
           - Assigns cluster role for cluster-admin to SA
           
-          - Installs Helm Chart for Traefik UI 1.7.2 
+          - Installs Helm Chart for Traefik UI 1.7.2  
 
 2. Configures Test Example for Named-Based Routing Using NGINX-based 'Cheese Web Services'
 
