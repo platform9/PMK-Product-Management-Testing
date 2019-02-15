@@ -1,8 +1,8 @@
-# DC-OS
-Eric Bannon - Sr. Presales Engineer, Mesosphere 
 
-My General Repository for different DC/OS Related Projects and K8s Labs 
+Eric Bannon - Platform9 
 
-email: ebannon@mesosphere.com 
+My General Repository for Related Projects and K8s Labs 
+
+email: eric@platform9.com
 
 *** Pleasse see individual project folders for specific instructions *** 
