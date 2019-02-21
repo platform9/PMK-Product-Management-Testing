@@ -20,7 +20,7 @@ I. Run the RUN1 dcos-k8s-install.sh script to configure K8s with options file fo
    "public-IP-kubelet" www.cheese-cheddar.com www.cheese-wesleydale.com www.cheese-stinton.com'
    
    - Edit your local /etc/hosts file with 
-   "public-IP-kubelet" <DNS Name for Kubelet Node>
+   "public-IP-kubelet" DNS Name for Kubelet Node
    *** This will allow you to access the traefik UI over public nodes DNS name ***
 
 II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds, tiller, and web services    
