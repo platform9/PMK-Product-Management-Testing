@@ -1,7 +1,5 @@
 #!/bin/bash
 
-# Get DC/OS Master Node URL
-
 echo
 echo " #########################################################"
 echo " ### Kubernetes API-Server Configuration Install  ###"
@@ -10,7 +8,7 @@ echo
 
 # Configure api server and deploy Kubernetes Dashboard over Local Host using Kube proxy
 
-        read -p 'Enter Public IP of the Kubelet manually (COMPLETED): ' PUBLICNODEIP
+        read -p 'Enter Public IP of the Kubelet manually: ' PUBLICNODEIP
         PUBLICNODEIP=$PUBLICNODEIP
 
 echo "Configuring Kubeconfig to use the DCOS-Kubernetes API Server URL for Frontend Traffic and Kubernetes Dashboard"
