@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if ! [ -x "$(command -v kubectl)" ]; then
+  echo 'First kubectl on your path... bye :)'
+  exit 1
+fi
+
 echo
 echo " #########################################################"
 echo " ### Kubernetes API-Server Configuration Install  ###"
