@@ -3,20 +3,20 @@
 
 echo
 echo " #########################################################################"
-echo " ### Traefik Ingress Controller Configuration and Install on DCOS-K8s  ###"
+echo " ### Traefik Ingress Controller Configuration and Install on K8s  ###"
 echo " #########################################################################"
 echo
 
 echo "######PLESSE CHECK THE FOLLOWING PRE-REQUISITES BEFORE INSTALL! ########"
 echo
-echo "1. You have installed kubernetes with exactly 1 Public Node in RUN1 options.json"
+echo "1. You have installed kubernetes with the proxy via Public Node in RUN1"
 sleep 2
 
-echo "2. You have found the public kubelet's node IP for kube-node-public-0-kubelet.kubernetes.mesos"
+echo "2. You have found the public kubelet's node IP" 
 sleep 2
 
 echo "3. You have edited your local machines '/etc/hosts' file with
-'<public-kubernetes-node-IP'> www.k8sdcos-cheddar.com"
+'<public-kubernetes-node-IP'> www.k8s-cheddar.com"
 sleep 2
 
 echo "Once you have finished the pre-requisites, please continue with the rest of the installation...."
@@ -117,7 +117,7 @@ sleep 3
 
 echo "Opening broswer now with hostname header for cheddar web service (NGINX Homepage) in a moment"
 sleep 7
-open http://k8sdcos-cheddar.com
+open http://k8s-cheddar.com
 
 fi
 

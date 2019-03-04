@@ -3,28 +3,25 @@ Leverages several up to date Traefik items https://github.com/containous/traefik
 
 To Install the DEMO:
 
-Ensure you have atleast 2 Public Nodes and 8 Private Nodes in DC/OS EE
+Ensure you have atleast 3 workers, and atleast 1 public kubelet 
 
-I. Run the RUN1 dcos-k8s-install.sh script to configure K8s with options file for 1 public node 
+I. Run the RUN1-k8singressprep.sh script to configure K8s with options file for 1 public node 
 
 -------------Steps Executed by Script(s) Below ---------------------
       
-      *** Installs Kubernetes with 1 Public Node
-      *** Installs Marathon-LB 
-      *** Deploys maraton app for kubectl proxy to server UI over localhost:8001
-      *** Configures api-server in kubeconfig to set api-server url backend for MLB
+      *** Configures api-server in kubeconfig to set api-server url
+      *** Deploys kubectl proxy to serve UI over localhost:8001
    
    BEFORE GOING ON TO STEP 2:
    
-   - Identify which public node the public-kubelet sits on (Execute findpublicips.sh script and use 
-     the one which is not for marathonlb)
+   - Identify the public IP of the node for the public-kubelet
      
    - Edit your local /etc/hosts file with 
    "public-IP-kubelet" www.cheese-cheddar.com www.cheese-wesleydale.com www.cheese-stinton.com'
    
    - Edit your local /etc/hosts file with 
-   "public-IP-kubelet" kube-node-0-kubelet.kubernetes.mesos 
-   *** This will allow you to access the traefik UI over http://kube-node-0-kubelet.kubernetes.mesos ***
+   "public-IP-kubelet" DNS Name for Kubelet Node
+   *** This will allow you to access the traefik UI over public nodes DNS name ***
 
 II. Run the RUN2 dcos.k8s.traefik-install.sh script to deploy ingress, pods, ds, tiller, and web services    
    
