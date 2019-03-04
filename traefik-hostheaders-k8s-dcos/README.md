@@ -5,7 +5,7 @@ To Install the DEMO:
 
 Ensure you have atleast 3 workers, and atleast 1 public kubelet 
 
-I. Run the RUN1 dcos-k8s-install.sh script to configure K8s with options file for 1 public node 
+I. Run the RUN1-k8singressprep.sh script to configure K8s with options file for 1 public node 
 
 -------------Steps Executed by Script(s) Below ---------------------
       
